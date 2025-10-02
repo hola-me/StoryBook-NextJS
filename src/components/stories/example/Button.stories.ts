@@ -2,52 +2,82 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
 import { Button } from './Button';
+import type { ButtonProps } from './Button'; // Import the props for better type checking
 
-// More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
+// --- 1. Meta Definition (Default Export) ---
 const meta = {
   title: 'Example/Button',
   component: Button,
   parameters: {
-    // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
   },
-  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
-  tags: ['autodocs', 'dev', 'test'],
-  // More on argTypes: https://storybook.js.org/docs/api/argtypes
+  tags: ['autodocs'],
   argTypes: {
+    // Note: TypeScript now recognizes these controls because we imported ButtonProps
     backgroundColor: { control: 'color' },
+    primary: { control: 'boolean' },
+    size: { control: 'select', options: ['small', 'medium', 'large'] },
   },
-  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
-  args: { onClick: fn() },
-} satisfies Meta<typeof Button>;
+  // Default args applied to ALL stories
+  args: {
+    label: 'Button Label', // Default label
+    onClick: fn(),        // Default action spy
+    primary: false,       // Default state is Secondary
+    size: 'medium',       // Default size
+  },
+} satisfies Meta<ButtonProps>;
 
 export default meta;
+
+// Define the Story type based on the Meta props
 type Story = StoryObj<typeof meta>;
 
-// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
+// --- 2. Stories ---
+
+/**
+ * The default Primary button style.
+ */
 export const Primary: Story = {
   args: {
+    // Only set what changes from the default meta.args (which is primary: false)
     primary: true,
-    label: 'Button',
   },
 };
 
+/**
+ * The default Secondary button style.
+ */
 export const Secondary: Story = {
-  args: {
-    label: 'Button',
-  },
+  // No args needed here as primary: false and size: 'medium' are inherited from meta.args
+  args: {}, 
 };
 
+/**
+ * The large-sized Primary button.
+ */
 export const Large: Story = {
   args: {
+    primary: true,
     size: 'large',
-    label: 'Button',
   },
 };
 
+/**
+ * The small-sized Secondary button.
+ */
 export const Small: Story = {
   args: {
     size: 'small',
-    label: 'Button',
+  },
+};
+
+/**
+ * Custom color button demonstrating the 'backgroundColor' argType control.
+ */
+export const CustomColor: Story = {
+  args: {
+    label: 'Custom Color',
+    backgroundColor: '#ff69b4', // Hot pink
+    primary: true, // Use primary text color
   },
 };
