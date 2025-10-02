@@ -1,7 +1,3 @@
-# T3 Stack Next.js Storybook shadcn/ui Template
-
-This is an open-source MIT template for building applications using the [T3 stack](https://create.t3.gg/), [StorybookJS](https://storybook.js.org/), and [ShadCN UI](https://ui.shadcn.com/). It is designed to be fast, simple, and easy to use, especially with the integration of Storybook and ShadCN.
-
 ## Table of Contents
 
 - [Getting Started](#getting-started)
@@ -15,16 +11,9 @@ This is an open-source MIT template for building applications using the [T3 stac
 
 First, run the development server:
 
-```bash
-npm install
-npm run dev
 ```
-
-Open http://localhost:3000 with your browser to see the result.
-
-You can start editing the page by modifying `src/app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses next/font to automatically optimize and load Geist, a new font family for Vercel.
+npm install
+```
 
 ## Storybook
 To start Storybook, run:
